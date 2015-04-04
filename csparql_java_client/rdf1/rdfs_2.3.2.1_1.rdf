@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xml:lang="en"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+<!-- Note: this RDF schema would typically be used in RDF instance data 
+     by referencing it with an XML namespace declaration, for example
+     xmlns:xyz="http://www.w3.org/2000/03/example/vehicles#".  This allows
+     us to use abbreviations such as xyz:MotorVehicle to refer
+     unambiguously to the RDF class 'MotorVehicle'. -->
+
+<rdf:Description ID="MotorVehicle">
+  <rdf:type resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+</rdf:Description>
+
+<rdf:Description ID="PassengerVehicle">
+  <rdf:type resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  <rdfs:subClassOf rdf:resource="#MotorVehicle"/>
+</rdf:Description>
+
+<rdf:Description ID="Truck">
+  <rdf:type resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  <rdfs:subClassOf rdf:resource="#MotorVehicle"/>
+</rdf:Description>
+
+<rdf:Description ID="Van">
+  <rdf:type resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  <rdfs:subClassOf rdf:resource="#MotorVehicle"/>
+</rdf:Description>
+
+<rdf:Description ID="MiniVan">
+  <rdf:type resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  <rdfs:subClassOf rdf:resource="#Van"/>
+  <rdfs:subClassOf rdf:resource="#PassengerVehicle"/>
+</rdf:Description>
+
+</rdf:RDF>

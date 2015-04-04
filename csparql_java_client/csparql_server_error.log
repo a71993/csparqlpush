@@ -1,0 +1,46 @@
+16:48:14.636 [main] ERROR csparql.Client_Server_Provider - rsp_server4csparql_server error
+polimi.deib.csparql_rest_api.exception.ServerErrorException: unreachable host
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.registerStream(RSP_services_csparql_API.java:136) ~[rsp-services-api-0.4.jar:na]
+	at csparql.Client_Server_Provider.main(Client_Server_Provider.java:88) ~[classes/:na]
+21:20:01.216 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream arg0. ERROR: "Specified stream does not exists"
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:228) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:66) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:01.250 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream arg0. ERROR: "Specified stream does not exists"
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:228) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:66) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:01.301 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream arg0. ERROR: "Specified stream does not exists"
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:228) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:66) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:01.310 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream http://ex.org/rabbit. ERROR: 
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:287) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:65) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:01.364 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream arg0. ERROR: "Specified stream does not exists"
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:228) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:66) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:03.433 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream arg0. ERROR: "Specified stream does not exists"
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:228) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:66) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:03.491 [Thread-7] ERROR csparql.streamer.BaseStreamer - StreamErrorException Occurred
+polimi.deib.csparql_rest_api.exception.StreamErrorException: Error while feeding stream arg0. ERROR: "Specified stream does not exists"
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:228) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:66) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
+21:20:04.861 [Dispatcher-0] ERROR org.apache.jena.riot - Content is not allowed in prolog.
+21:20:05.179 [Dispatcher-1] ERROR org.apache.jena.riot - Content is not allowed in prolog.
+21:22:00.391 [Thread-7] ERROR csparql.streamer.BaseStreamer - ServerErrorException Occurred
+polimi.deib.csparql_rest_api.exception.ServerErrorException: Unreachable Host
+	at polimi.deib.csparql_rest_api.RSP_services_csparql_API.feedStream(RSP_services_csparql_API.java:300) ~[rsp-services-api-0.4.jar:na]
+	at csparql.streamer.BaseStreamer.run(BaseStreamer.java:65) ~[classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]
