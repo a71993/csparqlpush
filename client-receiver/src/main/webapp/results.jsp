@@ -10,6 +10,8 @@
 	<body>
 	
 		<p><a href="../index.html">home</a></p>
+		<c:forEach var="ftriple" items="${ftriples}">
+		<p>${ftriple.key}</p>
 		<table id="results">
 		<thead>
 			<tr>
@@ -19,15 +21,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="triples" items="${triples}">
+			<c:forEach var="triple" items="${ftriple.value}">
 			<tr>
-				<td><c:out value="${triples.subject}"  /></td>
-				<td><c:out value="${triples.predicate}"  /></td>
-				<td><c:out value="${triples.object}"  /></td>
+				<td><c:out value="${triple.subject}"  /></td>
+				<td><c:out value="${triple.predicate}"  /></td>
+				<td><c:out value="${triple.object}"  /></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 		</table>
+		</c:forEach>
 
 
 

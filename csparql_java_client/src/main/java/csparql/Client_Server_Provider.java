@@ -105,7 +105,7 @@ public class Client_Server_Provider extends Application {
 					}
 					
 					
-					Thread.sleep(1000);
+					Thread.sleep(30000);
 					
 					
 //					query = "REGISTER STREAM RabbitWorld AS " +

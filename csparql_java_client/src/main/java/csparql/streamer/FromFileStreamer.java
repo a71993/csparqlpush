@@ -37,11 +37,6 @@ public class FromFileStreamer extends BaseStreamer {
 			File fileEntry = new File(filePath);
 			if (fileEntry.isDirectory()) {
 				File[] listOfFiles = fileEntry.listFiles();
-//				List<File> files = new ArrayList<>();
-//				for (File f : listOfFiles){
-//					files.add(f);
-//				}
-//				Collections.sort(files);
 				for (File file : listOfFiles) {
 					if (keepRunning) {
 						Model modelFromDir = ModelFactory.createDefaultModel();

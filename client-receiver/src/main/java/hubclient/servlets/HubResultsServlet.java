@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
@@ -28,84 +29,101 @@ import com.hp.hpl.jena.shared.JenaException;
 
 import hubclient.resources.RDFTriple;
 
-
 @SuppressWarnings("serial")
 public class HubResultsServlet extends HttpServlet {
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
 		String token = request.getParameter("hub.challenge");
-		
+
 		if (token != null) {
 			System.out.println("HubResultsServlet - doGet token: " + token);
-			
+
 			response.setHeader("Content-Type", "text/plain");
 
 			PrintWriter writer = response.getWriter();
 			writer.write(token);
 			writer.flush();
 			writer.close();
-		} else {		
-		
-			Model model = ModelFactory.createDefaultModel();
-	    	try{
-	    		model.read("results.xml");
-	    	}catch(JenaException e){
-	    		System.out.println("JenaException " + e);
-	    	}
-			
-	    	Gson gson = new Gson();
-	    	
-	    	ArrayList<RDFTriple> triples = new ArrayList<RDFTriple>();
-	    	Graph graph = model.getGraph();
-//	    	System.out.println(graph.toString());
-	    	StmtIterator iterator = model.listStatements();
-	    	try{
-		    	while(iterator.hasNext()){
-		    		RDFTriple triple = new RDFTriple();
-		    		com.hp.hpl.jena.rdf.model.Statement statement = iterator.nextStatement();
-		    		triple.setSubject(statement.getSubject().toString());
-		    		triple.setObject(statement.getObject().toString());
-		    		triple.setPredicate(statement.getPredicate().toString());
-		    		triples.add(triple);
-		    	}
-	    	}catch(NoSuchElementException e){
-	    		System.out.println("Exception: " + e);
-	    	}
-			
-	    	HttpSession session=request.getSession();
-	    	session.setAttribute("triples", triples);
-	    	session.setAttribute("time", new Date());
-	    	RequestDispatcher rd = getServletContext().getRequestDispatcher("/results.jsp");
-	    	rd.forward(request, response);
-		}
-		
-	}
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		} else {
 
-    	
-    	System.out.println("Proovime lugeda RDF-i!");
+			Model model = ModelFactory.createDefaultModel();
+			try {
+				model.read("results.xml");
+			} catch (JenaException e) {
+				System.out.println("JenaException " + e);
+			}
+
+			File fileEntry = new File("results");
+			File[] listOfFiles = fileEntry.listFiles();
+			Map<String, ArrayList<RDFTriple>> fromFilesTriples = new HashMap<>();
+			for (File file : listOfFiles) {
+				Model modelFromDir = ModelFactory.createDefaultModel();
+				String filePath = file.getPath();
+				System.out.println("file name: " + filePath);
+				modelFromDir.read(filePath);
+				ArrayList<RDFTriple> fromFileTriples = getTriplesFromModel(modelFromDir);
+				fromFilesTriples.put(filePath, fromFileTriples);
+			}
+			ArrayList<RDFTriple> triples = getTriplesFromModel(model);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("triples", triples);
+			session.setAttribute("ftriples", fromFilesTriples);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(
+					"/results.jsp");
+			rd.forward(request, response);
+		}
+
+	}
+
+	private ArrayList<RDFTriple> getTriplesFromModel(Model model) {
+		ArrayList<RDFTriple> triples = new ArrayList<RDFTriple>();
+		StmtIterator iterator = model.listStatements();
+		try {
+			while (iterator.hasNext()) {
+				RDFTriple triple = new RDFTriple();
+				com.hp.hpl.jena.rdf.model.Statement statement = iterator
+						.nextStatement();
+				triple.setSubject(statement.getSubject().toString());
+				triple.setObject(statement.getObject().toString());
+				triple.setPredicate(statement.getPredicate().toString());
+				triples.add(triple);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Exception: " + e);
+		}
+		return triples;
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("Proovime lugeda RDF-i!");
+		String topic = request.getParameter("hub.topic");
+		System.out.println("topic: " + topic);
+		System.out.println("requestURI: " + request.getRequestURI());
 		InputStream inputStream = request.getInputStream();
 		Model model = ModelFactory.createDefaultModel();
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		for (Entry<String, String[]> param : parameterMap.entrySet()){
-			System.out.print(param.getKey()+": ");
-			System.out.println(param.getValue()[0]);
+		File resultsDir = new File("results");
+		if(!resultsDir.exists()){
+			resultsDir.mkdir();
 		}
-		System.out.println("requestURI: "+request.getRequestURI());
-    	try{
-    		model.read(inputStream,"", "RDF/JSON");
-    		if(new File("results.xml").exists()){
-    			model.read(new FileInputStream("results.xml"),"");
-    		}
-    		System.out.println("Õnnestus!");
-    	}catch(JenaException e){
-    		System.out.println("Exception " + e);
-    	}
+		File file = new File(resultsDir, topic);
+		System.out.println(file.getAbsolutePath());
+		try {
+			model.read(inputStream, "", "RDF/JSON");
+			if (file.exists()) {
+				model.read(new FileInputStream(file), "");
+			}
+			System.out.println("Õnnestus!");
+		} catch (JenaException e) {
+			System.out.println("Exception " + e);
+		}
 
-    	System.out.println("Kirjutame tulemused results.xml-i");
-    	model.write(new FileOutputStream("results.xml"));
-    }
+		model.write(new FileOutputStream(file));
+	}
 }
