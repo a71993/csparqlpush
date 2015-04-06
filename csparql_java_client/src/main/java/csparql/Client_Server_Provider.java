@@ -72,8 +72,6 @@ public class Client_Server_Provider extends Application {
 		component.start();
 	
 		
-		System.out.println(args[0]);
-	
 		
 		if (startExample) {
 			

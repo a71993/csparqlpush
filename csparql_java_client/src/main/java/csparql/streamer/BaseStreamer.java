@@ -63,7 +63,6 @@ public class BaseStreamer implements Runnable {
 
 			try {
 				csparqlAPI.feedStream(streamName, m);
-				csparqlAPI.feedStream("arg0", "arg1");
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				logger.error("Error while launching the sleep operation", e);
