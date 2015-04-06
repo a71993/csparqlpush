@@ -21,4 +21,4 @@ Simple example query:
 ```
 REGISTER STREAM query1 AS CONSTRUCT { ?s ?p ?o } FROM STREAM <http://ex.org/rabbit> [RANGE 2s STEP 2s] WHERE { ?s ?p ?o }
 ```
-where 'http://ex.org/rabbit' is the stream where the query is run and 'query1' is the query name.
+where 'http://ex.org/rabbit' is the stream where the query is run on and 'query1' is the query name.
