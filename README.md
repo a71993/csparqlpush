@@ -12,10 +12,10 @@ Components:
 - csparql_java_client - Simple implemention of rsp-services made on the example of streamreasoning/rsp-services-client-example.
 - client-receiver - simple web forms for registering a query and subscribing to rabbithub exchanges plus an endpoint for the query results.
 
-All three components are lightweight maven projects, which run on jetty servlet engine. All can be run from eclipse or from a jar file. Jar can be generated with mvn package, which creates a target folder with a jar file inside.  
+All three components are lightweight maven projects. First two can be run from a jar. They can be generated with mvn package, which creates a target folder with a jar file inside. Client-reciever can be run using mvn jett:run command. All three can be run from eclipse.  
 rabbithub and rsp_services_csparql needs to be started first.  
 csparql_java_client will register a new stream named 'http://ex.org/rabbit' and feeds some rdf-s on it from a file or a folder, that it takes as a parameter. If none is given, it will auto-generate some random rdf triples.  
-client-receiver can be used to register a query on a stream. Csparql rsp_services will then automatically create an rabbitMQ exchange which can be subscribed to using client-reciever. Subscriptions callback url, where results are sent, is hard-coded at the moment and can be seen on client-receiver's results page.
+client-receiver can be used to register a query on a stream. Csparql rsp_services will then automatically create an rabbitMQ exchange which can be subscribed to using client-reciever. Subscriptions callback url, where results are sent, is hard-coded at the moment and can be seen on client-receiver's results page. It runs on jetty servlet engine
 
 Simple example query:  
 ```
