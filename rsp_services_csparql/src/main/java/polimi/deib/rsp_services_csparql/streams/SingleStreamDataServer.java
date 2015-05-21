@@ -267,10 +267,12 @@ public class SingleStreamDataServer extends ServerResource {
 					long ts = System.currentTimeMillis();
 
 					StmtIterator it = model.listStatements();
+					int cnt = 0;
 					while(it.hasNext()){
+						cnt++;
 						Statement st = it.next();
 						streamRepresentation.feed_RDF_stream(new RdfQuadruple(st.getSubject().toString(), st.getPredicate().toString(), st.getObject().toString(), ts));
-						System.out.println(" [x] Sending '" + st + "'");
+						System.out.println(cnt + " ["+ ts +"] Sending '" + st + "'");
 //					    channel.basicPublish("amq." + URLEncoder.encode(inputStreamName,"UTF-8"),"FOOWO" , null, st.getString().getBytes());
 //					    System.out.println(" [x] Sent '" + st + "'");
 					}
@@ -279,7 +281,7 @@ public class SingleStreamDataServer extends ServerResource {
 					this.getResponse().setEntity(gson.toJson("Stream " + inputStreamName + " succesfully feeded"), MediaType.APPLICATION_JSON);
 				} catch(Exception e){
 					try{
-						model.read(new ByteArrayInputStream(jsonSerialization.getBytes("UTF-8")),null,"RDF/XML");
+						model.read(new ByteArrayInputStream(jsonSerialization.getBytes("UTF-8")),"http://ex.org","RDF/XML");
 						long ts = System.currentTimeMillis();
 
 						StmtIterator it = model.listStatements();

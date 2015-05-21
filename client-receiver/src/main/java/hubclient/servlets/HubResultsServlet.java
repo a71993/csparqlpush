@@ -114,14 +114,16 @@ public class HubResultsServlet extends HttpServlet {
 		}
 		File file = new File(resultsDir, topic);
 		System.out.println(file.getAbsolutePath());
+		System.out.println(inputStream.toString());
 		try {
-			model.read(inputStream, "", "RDF/JSON");
+			model.read(inputStream, "http://ex.org", "RDF/JSON");
 			if (file.exists()) {
 				model.read(new FileInputStream(file), "");
 			}
 			System.out.println("Õnnestus!");
 		} catch (JenaException e) {
 			System.out.println("Exception " + e);
+			e.printStackTrace();
 		}
 
 		model.write(new FileOutputStream(file));
