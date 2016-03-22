@@ -1,0 +1,46 @@
+---
+- hosts: local
+  tasks:
+  - name: install erlang
+    apt: pkg=erlang state=installed
+
+  - name: install maven
+    apt: pkg=maven state=installed
+
+  - name: checkout rabbithub
+    git: repo=https://github.com/brc859844/rabbithub dest=/srv/checkout/rabbithub
+
+  - debug: msg="Rabbithub version is {{ lookup('ini', 'VSN file=/srv/checkout/rabbithub/Makefile)' }}"
+ 
+  - name: add rabbitmq repo to apt
+    copy: content="deb http://www.rabbitmq.com/debian/ testing main"
+          dest=/etc/apt/sources.list.d/
+
+  - name: install rabbitmq
+    apt: pkg=rabbitmq-server state=installed
+
+  - name: make debs rabbithub
+    command: make deps chdir=/srv/checkout/rabbithub
+
+  - name: make package rabbithub
+    command: make package chdir=/srv/checkout/rabbithub
+
+  - name: register rabbithub package
+    shell: ls /srv/checkout/rabbithub/dist/*.ez
+    register: rabbithub_plugin
+
+  - name: register rabbitmq plugin path
+    shell: dpkg -L rabbitmq-server | grep /plugins -m 1
+    register: rabbitmq_plugins
+
+  - name: cp rabbithub to rabbitmq plugins
+    copy: src={{rabbithub_plugin.stdout_lines.0}} dest={{rabbitmq_plugins.stdout_lines.0}}
+
+  - name: checkout csparqlpush
+    git: repo=https://github.com/a71993/csparqlpush dest=/srv/checkout/csparqlpush
+
+  - name: make rsp_services_csparql package
+    command: mvn package -f /srv/checkout/csparqlpush/rsp_services_csparql/pom.xml
+
+  - name: make client-receiver package
+    command: mvn package -f /srv/checkout/csparqlpush/client-receiver/pom.xml
