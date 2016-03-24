@@ -9,7 +9,7 @@
 <body>
 	<p><a href="index.html">home</a></p>
 	
-	<form id="my_settings" method="post" action="/query">
+	<form id="postQuery" method="post" action="/query">
           
         <h1> Post C-SPARQL query </h1>  
         
@@ -22,7 +22,19 @@
 		<p> query </p>
 		<textarea id="query" name="query" rows="30" cols="50"></textarea>
 
-		<input id="submitbutton" type="submit" value="Submit" />
+		<input id="querySubmit" type="submit" value="Submit" />
+
+                
+   </form>	
+   
+   	<form id="postStream" method="post" action="/stream">
+          
+        <h1> Post C-SPARQL stream </h1>  
+        
+        <p> stream name </p>  
+        <input name="streamname" type="text" />       
+
+		<input id="streamSubmit" type="submit" value="Submit" />
 
                 
    </form>	

@@ -4,7 +4,7 @@
   <artifactId>client-receiver</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
-  
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jettyVersion>9.1.5.v20140505</jettyVersion>

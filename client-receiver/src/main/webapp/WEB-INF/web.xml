@@ -37,6 +37,15 @@
     <servlet-name>QueryServlet</servlet-name>
     <url-pattern>/query</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>StreamServlet</servlet-name>
+    <servlet-class>hubclient.servlets.StreamServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StreamServlet</servlet-name>
+    <url-pattern>/stream</url-pattern>
+  </servlet-mapping>
  
    <servlet>
     <servlet-name>SubscriberServlet</servlet-name>
