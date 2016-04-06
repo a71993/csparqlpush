@@ -43,14 +43,15 @@ public class QueryServlet extends HttpServlet {
     	
 //    	String callbackURL = "http://localhost:8080/results";
 //    	String callbackURL = "http://guest:guest@localhost:15670/endpoint/x/amq."+URLEncoder.encode(streamname, "UTF-8")+"?hub.topic="+queryname;
-    	String callbackURL = "http://guest:guest@localhost:15670/endpoint/x/amq.direct?hub.topic="+queryname;
+//    	String callbackURL = "http://guest:guest@localhost:15670/endpoint/x/amq.direct?hub.topic="+queryname;
+    	String callbackURL = "http://localhost:8080/endpoint/"+queryname;
 
     	CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpPut httpPut = new HttpPut("http://localhost:8175/queries/" + queryname);
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
 		nvps.add(new BasicNameValuePair("query", query));
 		nvps.add(new BasicNameValuePair("streamName", streamname));
-		httpPut.setEntity(new UrlEncodedFormEntity(nvps));
+		httpPut.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
 		CloseableHttpResponse chResponse = httpclient.execute(httpPut);		
         try {
             System.out.println(chResponse.getStatusLine());

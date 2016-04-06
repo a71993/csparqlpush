@@ -112,11 +112,11 @@ public class HubResultsServlet extends HttpServlet {
 		if(!resultsDir.exists()){
 			resultsDir.mkdir();
 		}
-		File file = new File(resultsDir, topic);
+		File file = new File(resultsDir, topic != null ? topic : "results1");
 		System.out.println(file.getAbsolutePath());
 		System.out.println(inputStream.toString());
 		try {
-			model.read(inputStream, "http://ex.org", "RDF/JSON");
+			model.read(inputStream, null, "RDF/JSON");
 			if (file.exists()) {
 				model.read(new FileInputStream(file), "");
 			}

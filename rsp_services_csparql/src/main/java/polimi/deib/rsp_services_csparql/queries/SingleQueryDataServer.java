@@ -124,7 +124,7 @@ public class SingleQueryDataServer extends ServerResource {
 			String queryBody = "";
 			
 			if(contentType.startsWith("application")){
-				Form form = new Form(getRequest().getEntity());
+				Form form = new Form(getRequest().getEntity(), true);
 				queryBody = form.getValues("query");
 				System.out.println("queryBody: " + queryBody);
 			}else{
@@ -346,7 +346,7 @@ public class SingleQueryDataServer extends ServerResource {
 			System.out.println("query name: " + queryName);
 			
 //			callbackUrl = "http://guest:guest@localhost:15670/endpoint/x/amq."+URLEncoder.encode(streamName, "UTF-8")+"?hub.topic="+queryName;
-			callbackUrl = "http://guest:guest@localhost:15670/endpoint/x/amq.direct?hub.topic="+queryName;
+//			callbackUrl = "http://guest:guest@localhost:15670/endpoint/x/amq.direct?hub.topic="+queryName;
 
 			if(csparqlQueryTable.containsKey(queryName)){
 				Csparql_Query csparqlQuery = csparqlQueryTable.get(queryName);

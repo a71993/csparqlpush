@@ -108,11 +108,6 @@ public class rsp_services_csparql_server extends Application{
 			};  
 		}
 		
-		factory = new ConnectionFactory();
-		factory.setHost("localhost");		
-		connection = factory.newConnection();
-		channel = connection.createChannel();
-		
 		
 
 		component = new Component();

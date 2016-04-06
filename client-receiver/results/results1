@@ -1,0 +1,8 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://graph.ir.ee/person/" > 
+  <rdf:Description rdf:about="https://graph.ir.ee/persons/ee-36710050238">
+    <j.0:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">36710050238</j.0:identifier>
+    <j.0:registrationCountryCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EE</j.0:registrationCountryCode>
+  </rdf:Description>
+</rdf:RDF>

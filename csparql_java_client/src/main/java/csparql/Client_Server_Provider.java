@@ -3,6 +3,7 @@ package csparql;
 
 import csparql.json_dataset_deserialization.RDFTriple;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
@@ -23,6 +24,13 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.JenaException;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Consumer;
+import com.rabbitmq.client.DefaultConsumer;
+import com.rabbitmq.client.Envelope;
 
 //import com.rabbitmq.client.Channel;
 //import com.rabbitmq.client.Connection;
@@ -35,6 +43,7 @@ import csparql.json_dataset_deserialization.List_of_Sparql_json_results_oracle;
 import csparql.results_manipulator.ResultsManipulator_Oracle;
 import csparql.streamer.BaseStreamer;
 import csparql.streamer.FromFileStreamer;
+import csparql.streamer.RabbitStreamer;
 
 public class Client_Server_Provider extends Application {
 	
@@ -47,8 +56,6 @@ public class Client_Server_Provider extends Application {
 	private static List_of_Sparql_json_results_oracle json_results_list = new List_of_Sparql_json_results_oracle();
 	
 	private static String csparqlServerAddress = "http://localhost:8175";
-	
-//	private final static String QUEUE_NAME = "csparqlstream";
 	
 	@SuppressWarnings("unused")	
 	public static void main(String[] args) throws Exception {
@@ -85,7 +92,7 @@ public class Client_Server_Provider extends Application {
 			String streamName;
 			String queryURI;
 
-			String generalIRI = "http://ex.org/";
+			String generalIRI = "http://localhost/";
 			
 			RSP_services_csparql_API csparqlAPI = new RSP_services_csparql_API(csparqlServerAddress);
 			
@@ -93,7 +100,7 @@ public class Client_Server_Provider extends Application {
 			case SINGLE_CONSTRUCT_QUERY_SINGLE_OBSERVER:
 				try{
 					
-					inputstreamName = generalIRI + "rabbit";
+					inputstreamName = "http://localhost/memberships";
 					
 					String streamsInfo = csparqlAPI.getStreamsInfo();
 					System.out.println(streamsInfo);
@@ -101,50 +108,29 @@ public class Client_Server_Provider extends Application {
 					if(!streamsInfo.contains(inputstreamName)) {
 						csparqlAPI.registerStream(inputstreamName);
 					}
-					
-					
-					Thread.sleep(30000);
-					
-					
-//					query = "REGISTER STREAM RabbitWorld AS " +
-//							"CONSTRUCT { ?s ?p ?o } " +
-//							"FROM STREAM <" + inputstreamName + "> [RANGE 2s STEP 2s] " +
-//							"WHERE { ?s ?p ?o }";
-//					
-//					queryURI = csparqlAPI.registerQuery("RabbitWorld", query);
-					
-					json_results_list.setStartTS(System.currentTimeMillis());
-					
+//					json_results_list.setStartTS(System.currentTimeMillis());
 //					Client_Server_Provider.queryProxyIdTable.put(query, queryURI);
-					
-//					String obsURI = csparqlAPI.addObserver(queryURI, actual_client_address + ":" + actual_client_port + "/results");
-					
+
 
 					BaseStreamer demostream;
-					
 					if(args.length > 0) {
 						demostream = new FromFileStreamer(csparqlAPI, inputstreamName, 3000, generalIRI, args[0]);
 					}else {
-						
-						demostream = new BaseStreamer(csparqlAPI, inputstreamName, 3000, generalIRI);
+						demostream = new RabbitStreamer(csparqlAPI, inputstreamName, 3000, generalIRI);
 					}
-					new Thread(demostream).start();
 					
+					new Thread(demostream).start();
+//					demostream.stopStream();
 
 					
 					System.out.println(csparqlAPI.getStreamInfo(inputstreamName));
 
-					
-					Thread.sleep(600000);
-//					
-//					System.out.println(csparqlAPI.deleteObserver(obsURI));
-//					System.out.println(csparqlAPI.unregisterQuery(queryURI));
-					demostream.stopStream();
 				} catch (ServerErrorException e) {
 					logger.error("rsp_server4csparql_server error", e);
-				} catch (InterruptedException e) {
-					logger.error("Error while launching the sleep operation", e);
-				}
+				} 
+//				catch (InterruptedException e) {
+//					logger.error("Error while launching the sleep operation", e);
+//				}
 				break;
 			default:
 				System.exit(0);

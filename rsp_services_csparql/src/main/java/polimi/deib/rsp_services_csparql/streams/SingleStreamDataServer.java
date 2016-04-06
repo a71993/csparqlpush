@@ -118,24 +118,24 @@ public class SingleStreamDataServer extends ServerResource {
 				this.getResponse().setEntity(gson.toJson("Stream " + inputStreamName + " succesfully registered"), MediaType.APPLICATION_JSON);
 				
 //				PUT "http://guest:guest@localhost:15670/endpoint/x/" + stream;
-				CloseableHttpClient httpclient = HttpClients.createDefault();
-//				HttpPut httpPut = new HttpPut("http://guest:guest@localhost:15670/endpoint/x/amq." + URLEncoder.encode(inputStreamName, "UTF-8")  + "?amqp.exchange_type=topic");			
-				HttpPut httpPut = new HttpPut("http://guest:guest@localhost:15670/endpoint/x/amq.direct");			
-				CloseableHttpResponse response = httpclient.execute(httpPut);
-				
-		        try {
-		            System.out.println(response.getStatusLine());
-//		            HttpEntity entity = response.getEntity();
-//			  		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-//			  		String output;
-//			  		System.out.println("Trying to set up exchange.. \n Output from Server .... \n");
-//			  		while ((output = br.readLine()) != null) {
-//			  			System.out.println(output);
-//			  		}
-//		            EntityUtils.consume(entity);
-		        } finally {
-		            response.close();
-		        }
+//				CloseableHttpClient httpclient = HttpClients.createDefault();
+////				HttpPut httpPut = new HttpPut("http://guest:guest@localhost:15670/endpoint/x/amq." + URLEncoder.encode(inputStreamName, "UTF-8")  + "?amqp.exchange_type=topic");			
+//				HttpPut httpPut = new HttpPut("http://guest:guest@localhost:15670/endpoint/x/amq.direct");			
+//				CloseableHttpResponse response = httpclient.execute(httpPut);
+//				
+//		        try {
+//		            System.out.println(response.getStatusLine());
+////		            HttpEntity entity = response.getEntity();
+////			  		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+////			  		String output;
+////			  		System.out.println("Trying to set up exchange.. \n Output from Server .... \n");
+////			  		while ((output = br.readLine()) != null) {
+////			  			System.out.println(output);
+////			  		}
+////		            EntityUtils.consume(entity);
+//		        } finally {
+//		            response.close();
+//		        }
 
 			} else {
 				this.getResponse().setStatus(Status.SERVER_ERROR_INTERNAL,inputStreamName + " already exists");
