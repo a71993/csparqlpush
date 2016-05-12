@@ -1,6 +1,6 @@
-# csparqlpush
+# Proof of Concepts
 
-This is a project for integrating c-sparql engine's restful API with pubsubhubbub. 
+This is a source code of Proof of Concepts(PoC) for "Filtering Real-Time Linked Data Streams" thesis. The description of PoC 1 is in Section 4.6.1 of the thesis and the description of PoC 2 is in Section 4.6.2.
 
 Requirements:
 - RabbitMQ 
