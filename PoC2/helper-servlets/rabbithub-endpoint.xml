@@ -1,0 +1,94 @@
+<?xml version="1.0"?><?xml-stylesheet href="/rabbithub/static/application.xsl.xml" type="text/xsl" ?>
+<application>
+	<name></name>
+	<description>AMQP exchange '' in vhost '/'</description>
+	<class>amqp.exchange</class>
+	<parameters>
+		<parameter name="amqp.exchange_type" value="direct" />
+	</parameters>
+	<facets>
+		<facet name="endpoint">
+			<description>Facet permitting delivery of pubsub messages into the
+				application.</description>
+			<actions>
+				<action hub.mode="" http.method="PUT" name="create">
+					<description>Create an endpoint.</description>
+					<parameter name="amqp.exchange_type" location="query"
+						defaultvalue="fanout" optional="true">
+						<description>(When creating an exchange) Specifies the AMQP
+							exchange type.</description>
+					</parameter>
+				</action>
+				<action hub.mode="" http.method="DELETE" name="destroy">
+					<description>Destroy the endpoint.</description>
+				</action>
+				<action http.method="POST" name="deliver">
+					<description>Deliver a message to the endpoint.</description>
+					<parameter name="hub.topic" location="query"
+						defaultvalue="">
+						<description>The routing key to use for the delivery.
+						</description>
+					</parameter>
+					<parameter name="content-type" location="headers">
+						<description>The content-type of the body to deliver.
+						</description>
+					</parameter>
+					<parameter name="body" location="body">
+						<description>The body of the HTTP request is used as the message
+							to deliver.</description>
+					</parameter>
+				</action>
+				<action hub.mode="" http.method="GET" name="info">
+					<description>Retrieve a description of the application.
+					</description>
+				</action>
+				<action hub.mode="subscribe" http.method="GET"
+					name="verify_subscription">
+					<description>Ensure that an earlier-generated token is valid and
+						intended for use as a subscription token.</description>
+					<parameter name="hub.challenge" location="query">
+						<description>Token to echo to the caller.</description>
+					</parameter>
+					<parameter name="hub.lease_seconds" location="query">
+						<description>Number of seconds that the subscription will remain
+							active before expiring.</description>
+					</parameter>
+					<parameter name="hub.verify_token" location="query">
+						<description>The token to validate.</description>
+					</parameter>
+				</action>
+				<action hub.mode="unsubscribe" http.method="GET"
+					name="verify_unsubscription">
+					<description>Ensure that an earlier-generated token is valid and
+						intended for use as an unsubscription token.</description>
+					<parameter name="hub.challenge" location="query">
+						<description>Token to echo to the caller.</description>
+					</parameter>
+					<parameter name="hub.lease_seconds" location="query"
+						optional="true">
+						<description>Number of seconds that the subscription will remain
+							active before expiring.</description>
+					</parameter>
+					<parameter name="hub.verify_token" location="query">
+						<description>The token to validate.</description>
+					</parameter>
+				</action>
+				<action hub.mode="generate_token" http.method="GET"
+					name="generate_token">
+					<description>Generate a verify_token for use in subscribing this
+						application to (or unsubscribing this application from) some other
+						application's message stream.</description>
+					<parameter name="hub.intended_use" location="query">
+						<description>Either 'subscribe' or 'unsubscribe', depending on the
+							intended use of the token.</description>
+					</parameter>
+					<parameter name="rabbithub.data" location="query"
+						defaultvalue="">
+						<description>Additional data to be checked during the verification
+							stage.</description>
+					</parameter>
+				</action>
+			</actions>
+		</facet>
+	</facets>
+</application>

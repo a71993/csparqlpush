@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" /> 
+
+</head>
+
+<body>
+	<p><a href="index.html">home</a></p>
+	
+	<form id="postQuery" method="post" action="/query">
+          
+        <h1> Post C-SPARQL query </h1>  
+        
+        <p> query name </p>  
+        <input name="queryname" type="text" />   
+        
+        <p> stream name </p>  
+        <input name="streamname" type="text" />       
+                
+		<p> query </p>
+		<textarea id="query" name="query" rows="30" cols="50"></textarea>
+
+		<input id="querySubmit" type="submit" value="Submit" />
+
+                
+   </form>	
+   
+   	<form id="postStream" method="post" action="/stream">
+          
+        <h1> Post C-SPARQL stream </h1>  
+        
+        <p> stream name </p>  
+        <input name="streamname" type="text" />       
+
+		<input id="streamSubmit" type="submit" value="Submit" />
+
+                
+   </form>	
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://purl.org/dc/terms/"
+    xmlns:j.1="http://vocab.deri.ie/diff#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#MotorVehicle">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#Truck">
+    <rdfs:subClassOf rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#MotorVehicle"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.3.1_1.rdf#biologicalFather">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:subPropertyOf rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.3.1_1.rdf#biologicalParent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.3.1_1.rdf#biologicalParent">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#Van">
+    <rdfs:subClassOf rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#MotorVehicle"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.postimees.ee/diff/1396187504-1396187534/3/removal">
+    <j.1:lineNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</j.1:lineNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.postimees.ee/diff/1396187504-1396187534">
+    <j.0:hasPart rdf:resource="http://www.postimees.ee/diff/1396187504-1396187534/3"/>
+    <j.0:hasPart rdf:resource="http://www.postimees.ee/diff/1396187504-1396187534/2"/>
+    <j.0:hasPart rdf:resource="http://www.postimees.ee/diff/1396187504-1396187534/1"/>
+    <j.0:hasPart rdf:resource="http://www.postimees.ee/diff/1396187504-1396187534/4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#PassengerVehicle">
+    <rdfs:subClassOf rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#MotorVehicle"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.postimees.ee/diff/1396187504-1396187534/1/removal">
+    <j.1:lineNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">112</j.1:lineNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.postimees.ee/diff/1396187504-1396187534/4/addition">
+    <j.1:lineNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</j.1:lineNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_3.2_1.rdf#registeredTo">
+    <rdfs:domain rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_3.2_1.rdf#MotorVehicle"/>
+    <rdfs:range rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_3.2_1.rdf#Person"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_3.2_1.rdf#rearSeatLegRoom">
+    <rdfs:domain rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_3.2_1.rdf#PassengerVehicle"/>
+    <rdfs:domain rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_3.2_1.rdf#Minivan"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/03/example/classes#Number"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#MiniVan">
+    <rdfs:subClassOf rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#Van"/>
+    <rdfs:subClassOf rdf:resource="file:///home/mikk/workspace/csparql_server/rdf1/rdfs_2.3.2.1_1.rdf#PassengerVehicle"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.postimees.ee/diff/1396187504-1396187534/2/addition">
+    <j.1:lineNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">111</j.1:lineNumber>
+  </rdf:Description>
+</rdf:RDF>
