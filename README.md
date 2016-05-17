@@ -10,7 +10,7 @@ Requirements:
 Components:
 - rsp_services_csparql - RDF stream Processors(rsp) RESTful Interfaces downloaded from http://streamreasoning.org/download/ and tweaked to interact with the rabbithub.
 - csparql_java_client - Simple implemention for generating RDF streams made on the example of streamreasoning/rsp-services-client-example.
-- client-receiver - simple web forms for registering a query and subscribing to rabbithub exchanges plus an endpoint for the query results.
+- helper-servlets - simple web forms for registering a query and subscribing to rabbithub exchanges plus an endpoint for the query results.
 
 All three components are lightweight maven projects. First two can be run from a jar. They can be generated with mvn package, which creates a target folder with a jar file inside. Client-reciever can be run using mvn jett:run command. All three can be run from an IDE like eclipse.  
 
